@@ -5,10 +5,15 @@ var port = 3000;
 
 var app = express();
 
+var methodOverride = require("method-override");
+
+
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(methodOverride("_method"));
 
 // Set Handlebars.
 var exphbs = require("express-handlebars");
@@ -20,5 +25,7 @@ app.set("view engine", "handlebars");
 var routes = require("./controllers/burgers_controller.js");
 
 app.use("/", routes);
+app.use("/update", routes);
+app.use("/create", routes);
 
-app.listen(port);
+app.listen(console.log("Listening on " + "'localhost:3000/burgers'"));
